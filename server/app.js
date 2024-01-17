@@ -9,9 +9,8 @@ const passport = require("passport");
 const OAuth2Strategy = require("passport-google-oauth2").Strategy;
 const userdb = require("./model/userSchema");
 
-const clientid =
-  "516080705407-1vb97t7qn0lu1v0ivp7dap7rvha0ritr.apps.googleusercontent.com";
-const clientsecret = "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";
+const clientId = process.env.GOOGLE_CLIENT_ID;
+const clientSecret = process.env.GOOGLE_CLIENT_SECRET;
 
 app.use(
   cors({
@@ -38,8 +37,8 @@ app.use(passport.session());
 passport.use(
   new OAuth2Strategy(
     {
-      clientID: clientid,
-      clientSecret: clientsecret,
+      clientID: clientId,
+      clientSecret: clientSecret,
       callbackURL: "/auth/google/callback",
       scope: ["profile", "email"],
     },
